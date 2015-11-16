@@ -25,6 +25,9 @@ public class ClubbyApplication extends Application {
         // Add your initialization code here
         Parse.initialize(this, "vvvz4o7CcBGfI0yyIlpVBhrKWBDVO7ngD2mCW83Q", "spSTtGOSPXRQ2XgjU2FFChJwzfPLRlinsGV61gpK");
 
+
+        //hier wird ein immer wenn der richtige User ausgeloggt ist, ein automatischer anonymer User erstllt
+        //das ist schlecht für den logout Prozess
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
         // Optionally enable public read access.
