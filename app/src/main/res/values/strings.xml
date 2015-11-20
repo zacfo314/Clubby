@@ -6,6 +6,7 @@
     <string name="action_logout">Abmelden</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_login">Anmelden</string>
+    <string name="club_members">Mitglieder</string>
 
     <!-- Strings related to login -->
     <string name="prompt_name">Benutzername</string>

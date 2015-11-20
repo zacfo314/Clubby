@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             // If current user is NOT anonymous user
             // Get current user data from Parse.com
-            ParseUser currentUser = ParseUser.getCurrentUser();
-            if (currentUser != null) {
-                // Send logged in users to Welcome.class
+            ParseUser user = ParseUser.getCurrentUser();
+            if (user != null) {
+                // Send logged in users to ClubActivity.class
                 Intent intent = new Intent(MainActivity.this, ClubActivity.class);
                 startActivity(intent);
                 finish();
