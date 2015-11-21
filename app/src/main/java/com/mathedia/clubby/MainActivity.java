@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Determine whether the current user is an anonymous user
         if (ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())) {
-             // If user is anonymous, send the user to LoginActivity.class
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+             // If user is anonymous, send the user to WelcomeActivity.class
+            Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
             startActivity(intent);
             finish();
         } else {
@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else {
-                // Send user to LoginActivity.class
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                // Send user to WelcomeActivity.class
+                Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
                 startActivity(intent);
                 finish();
             }

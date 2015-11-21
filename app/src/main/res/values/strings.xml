@@ -11,7 +11,12 @@
     <!-- Strings related to login -->
     <string name="prompt_name">Benutzername</string>
     <string name="prompt_password">Passwort</string>
+    <string name="signup_text">Neu bei Clubby?</string>
+    <string name="signup_button_text">Registrieren</string>
+    <string name="login_text">Du hast schon ein Konto?</string>
     <string name="login_button_text">Anmelden</string>
+    <string name="facebook_text">Mit Facebook anmelden:</string>
+    <string name="facebook_button_text">Facebook</string>
 
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">Ungültige E-Mail Adresse</string>
