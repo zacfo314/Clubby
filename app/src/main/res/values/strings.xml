@@ -10,7 +10,9 @@
 
     <!-- Strings related to login -->
     <string name="prompt_name">Benutzername</string>
+    <string name="e_mail_text">E-Mail Adresse</string>
     <string name="prompt_password">Passwort</string>
+    <string name="prompt_password_repeat">Passwort wiederholen</string>
     <string name="signup_text">Neu bei Clubby?</string>
     <string name="signup_button_text">Registrieren</string>
     <string name="login_text">Du hast schon ein Konto?</string>
@@ -20,9 +22,10 @@
 
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">Ungültige E-Mail Adresse</string>
-    <string name="error_invalid_password">Mindestens fünf Zeichen</string>
+    <string name="error_invalid_password">Mindestens sechs Zeichen</string>
+    <string name="error_notequal_password">Passwörter sind nicht gleich</string>
     <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">Einen Namen eingeben</string>
+    <string name="error_field_required">Mindestens fünf Zeichen</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

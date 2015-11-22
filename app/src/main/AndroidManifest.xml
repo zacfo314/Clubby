@@ -24,21 +24,22 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ClubActivity"
-            android:launchMode="singleTop"></activity>
+            android:launchMode="singleTop" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".ClubMembersActivity"
             android:label="@string/club_members"
-            android:parentActivityName=".ClubActivity"></activity>
-        <activity
-            android:name=".WelcomeActivity"></activity>
+            android:parentActivityName=".ClubActivity" />
+        <activity android:name=".WelcomeActivity" />
+        <activity android:name=".SignupActivity"></activity>
     </application>
 
 </manifest>
