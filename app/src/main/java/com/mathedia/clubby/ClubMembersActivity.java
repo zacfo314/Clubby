@@ -2,6 +2,7 @@ package com.mathedia.clubby;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -23,6 +24,8 @@ public class ClubMembersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_members);
+        Toolbar Toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(Toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setHomeButtonEnabled(true);
 

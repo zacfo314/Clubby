@@ -37,7 +37,7 @@ public class WelcomeActivity extends AppCompatActivity {
         mFacebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Facebook Login implementieren
+                //TODO Facebook Login implementieren
             }
         });
     }
