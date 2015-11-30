@@ -21,8 +21,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:text="@string/signup_text" />
 
             <Button
@@ -38,8 +38,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="12dp"
                 android:text="@string/login_text" />
 
             <Button
@@ -55,8 +55,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="12dp"
                 android:text="@string/facebook_text" />
 
             <Button

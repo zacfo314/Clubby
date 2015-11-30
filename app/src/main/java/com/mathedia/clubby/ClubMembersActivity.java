@@ -1,21 +1,11 @@
 package com.mathedia.clubby;
 
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseRelation;
-import com.parse.ParseUser;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.support.v7.widget.Toolbar;
 
 public class ClubMembersActivity extends AppCompatActivity {
 
@@ -23,18 +13,53 @@ public class ClubMembersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_members);
+        Toolbar Toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(Toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setHomeButtonEnabled(true);
 
+        ListFragment fragment = new MemberFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        //In extras ist der Club gespeichert, der in der ClubActivity angeclickt wurde
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String clubID = extras.getString("clubID");
+            fragment.setArguments(extras);
+        }
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.container, fragment, "MitgliederFragment");
+        fragmentTransaction.commit();
+    }
 
-            final ListView listview = (ListView) findViewById(R.id.listview);
+/*    //Das Fragment, das die Mitglieder anzeigt
+    public static class ClubMembersFragment extends ListFragment {
 
-            ArrayList<String> membersNameList = new ArrayList<String>();
-            final ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-            listview.setAdapter(adapter);
+        private static final ArrayList<String> memberIDs = new ArrayList<String>();
+
+        public ClubMembersFragment() {
+        }
+
+        public static ClubMembersFragment newInstance() {
+            ClubMembersFragment fragment = new ClubMembersFragment();
+            return fragment;
+        }
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+            super.onActivityCreated(savedInstanceState);
+
+            Toast.makeText(getActivity(), "Fragment gestartet ", Toast.LENGTH_LONG).show();
+
+            final ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1);
+            setListAdapter(adapter);
+
+            adapter.add("bla");
+            adapter.add("bla");
+            adapter.add("bla");
+            adapter.add("bla");
+            adapter.add("bla");
+            adapter.add("bla");
+            adapter.add("bla");
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Club");
             query.getInBackground(clubID, new GetCallback<ParseObject>() {
@@ -43,8 +68,9 @@ public class ClubMembersActivity extends AppCompatActivity {
                         ParseRelation usersRelation = club.getRelation("users");
                         try {
                             List<ParseUser> members = usersRelation.getQuery().find();
-                            for(int i=0; i < members.size(); i++) {
+                            for (int i = 0; i < members.size(); i++) {
                                 String memberName = members.get(i).getString("username");
+                                Toast.makeText(getActivity(), "Mitglied: " + memberName, Toast.LENGTH_LONG).show();
                                 adapter.add(memberName);
                             }
                         } catch (ParseException e1) {
@@ -53,9 +79,80 @@ public class ClubMembersActivity extends AppCompatActivity {
 
                     } else {
                         // something went wrong
+                        Toast.makeText(getActivity(), "Keine Mitglieder des Clubs gefunden", Toast.LENGTH_LONG).show();
                     }
                 }
             });
         }
-    }
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            setHasOptionsMenu(true);
+
+        }
+
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            inflater.inflate(R.menu.menu_clubs, menu);
+            super.onCreateOptionsMenu(menu, inflater);
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
+
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_logout) {
+                ParseUser.logOutInBackground(new LogOutCallback() {
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            Toast.makeText(getActivity(), "Abmelden erfolgreich", Toast.LENGTH_LONG).show();
+
+                            //TODO Logout richtig implementieren, damit wieder die Startseite geladen wird
+
+//                            Intent intent = new Intent(
+//                                    ClubActivity.this,
+//                                    MainActivity.class);
+//                            startActivity(intent);
+//                            finish();
+
+                        } else {
+                            Toast.makeText(getActivity(), "Abmelden fehlgeschlagen", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                    }
+                });
+                return true;
+            }
+
+            if (id == R.id.action_create_group) {
+
+                Toast.makeText(getActivity(), "Club erstellt", Toast.LENGTH_LONG).show();
+
+                //TODO Logout richtig implementieren, damit wieder die Startseite geladen wird
+
+//                            Intent intent = new Intent(
+//                                    ClubActivity.this,
+//                                    MainActivity.class);
+//                            startActivity(intent);
+//                            finish();
+
+
+                return true;
+            }
+
+            return super.onOptionsItemSelected(item);
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_club_members, container, false);
+        return rootView;
+        }
+    }*/
 }

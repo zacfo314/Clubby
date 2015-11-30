@@ -4,6 +4,7 @@
 
     <string name="app_name">Clubby</string>
     <string name="action_logout">Abmelden</string>
+    <string name="action_create_club">Neuer Club</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_login">Anmelden</string>
     <string name="club_members">Mitglieder</string>

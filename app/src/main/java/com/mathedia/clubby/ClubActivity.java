@@ -1,22 +1,22 @@
 package com.mathedia.clubby;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ListFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,14 +62,8 @@ public class ClubActivity extends AppCompatActivity {
 
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        //TOBI: hier Toolbar bearbeiten, ich hab
-        //setSupportActionBar(toolbar);
-
-        //auskommentiert
-
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         // Create the adapter that will return a fragment for each of the two
         // primary sections of the activity.
@@ -81,18 +75,7 @@ public class ClubActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -199,6 +182,20 @@ public class ClubActivity extends AppCompatActivity {
         }
 
         @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            setHasOptionsMenu(true);
+
+        }
+
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            inflater.inflate(R.menu.menu_dates, menu);
+            super.onCreateOptionsMenu(menu, inflater);
+        }
+
+        @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_club, container, false);
@@ -210,7 +207,6 @@ public class ClubActivity extends AppCompatActivity {
 
     //Das Fragment, das die Clubs anzeigt
     public static class ClubsFragment extends ListFragment {
-
 
         private static final ArrayList<String> clubIDs = new ArrayList<String>();
 
@@ -226,7 +222,7 @@ public class ClubActivity extends AppCompatActivity {
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
 
-            ArrayList<String> clubNameList = new ArrayList<String>();
+            //ArrayList<String> clubNameList = new ArrayList<String>();
             final ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1);
             setListAdapter(adapter);
 
@@ -236,7 +232,7 @@ public class ClubActivity extends AppCompatActivity {
                 public void done(List<ParseObject> clubList, ParseException e) {
                     if (e == null) {
                         Log.d("score", "Retrieved " + clubList.size() + " scores");
-                        for(int i=0; i < clubList.size(); i++) {
+                        for (int i = 0; i < clubList.size(); i++) {
                             ParseObject club = clubList.get(i);
                             String clubName = club.getString("clubName");
                             adapter.add(clubName);
@@ -256,8 +252,73 @@ public class ClubActivity extends AppCompatActivity {
             String selection = " "+position;
             Toast.makeText(getActivity(), selection, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getActivity(), ClubMembersActivity.class);
+            //In extras wird der angeklickte Club gespeichert
             intent.putExtra("clubID", clubIDs.get(position));
             startActivity(intent);
+        }
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            setHasOptionsMenu(true);
+
+        }
+
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            inflater.inflate(R.menu.menu_clubs, menu);
+            super.onCreateOptionsMenu(menu, inflater);
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
+
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_logout) {
+                ParseUser.logOutInBackground(new LogOutCallback() {
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            Toast.makeText(getActivity(), "Abmelden erfolgreich", Toast.LENGTH_LONG).show();
+
+                            //TODO Logout richtig implementieren, damit wieder die Startseite geladen wird
+
+//                            Intent intent = new Intent(
+//                                    ClubActivity.this,
+//                                    MainActivity.class);
+//                            startActivity(intent);
+//                            finish();
+
+                        } else {
+                            Toast.makeText(getActivity(), "Abmelden fehlgeschlagen", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                    }
+                });
+                return true;
+            }
+
+            if (id == R.id.action_create_group) {
+
+                            Toast.makeText(getActivity(), "Club erstellt", Toast.LENGTH_LONG).show();
+
+                            //TODO Logout richtig implementieren, damit wieder die Startseite geladen wird
+
+//                            Intent intent = new Intent(
+//                                    ClubActivity.this,
+//                                    MainActivity.class);
+//                            startActivity(intent);
+//                            finish();
+
+
+                return true;
+            }
+
+            return super.onOptionsItemSelected(item);
         }
 
         //@Override
