@@ -77,22 +77,26 @@ public class ClubActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+//    Menü wird von den Tabs befüllt
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_logout) {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_logout) {
+    public boolean logout() {
             ParseUser.logOutInBackground(new LogOutCallback() {
                 public void done(ParseException e) {
                     if (e == null) {
@@ -110,10 +114,10 @@ public class ClubActivity extends AppCompatActivity {
                 }
             });
             return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
     /**
@@ -194,6 +198,20 @@ public class ClubActivity extends AppCompatActivity {
             inflater.inflate(R.menu.menu_dates, menu);
             super.onCreateOptionsMenu(menu, inflater);
         }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
+
+            if (id == R.id.action_logout) {
+                ((ClubActivity)getActivity()).logout();
+            }
+            return super.onOptionsItemSelected(item);
+        }
+
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -278,43 +296,13 @@ public class ClubActivity extends AppCompatActivity {
             // as you specify a parent activity in AndroidManifest.xml.
             int id = item.getItemId();
 
-            //noinspection SimplifiableIfStatement
             if (id == R.id.action_logout) {
-                ParseUser.logOutInBackground(new LogOutCallback() {
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            Toast.makeText(getActivity(), "Abmelden erfolgreich", Toast.LENGTH_LONG).show();
-
-                            //TODO Logout richtig implementieren, damit wieder die Startseite geladen wird
-
-//                            Intent intent = new Intent(
-//                                    ClubActivity.this,
-//                                    MainActivity.class);
-//                            startActivity(intent);
-//                            finish();
-
-                        } else {
-                            Toast.makeText(getActivity(), "Abmelden fehlgeschlagen", Toast.LENGTH_LONG).show();
-                            return;
-                        }
-                    }
-                });
-                return true;
+                ((ClubActivity)getActivity()).logout();
             }
 
-            if (id == R.id.action_create_group) {
+            if (id == R.id.action_create_club) {
 
                             Toast.makeText(getActivity(), "Club erstellt", Toast.LENGTH_LONG).show();
-
-                            //TODO Logout richtig implementieren, damit wieder die Startseite geladen wird
-
-//                            Intent intent = new Intent(
-//                                    ClubActivity.this,
-//                                    MainActivity.class);
-//                            startActivity(intent);
-//                            finish();
-
-
                 return true;
             }
 

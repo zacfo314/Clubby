@@ -8,10 +8,10 @@
         app:showAsAction="never"
     />
     <item
-        android:id="@+id/action_create_group"
+        android:id="@+id/action_create_club"
         android:icon="@drawable/pluswhite"
         android:title="@string/action_create_club"
-        android:visible="false"
+        android:visible="true"
         app:showAsAction="ifRoom"
         />
 </menu>
