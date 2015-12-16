@@ -265,8 +265,8 @@ public class ClubActivity extends AppCompatActivity {
                 ((ClubActivity)getActivity()).logout(true);
             }
             if (id == R.id.action_create_club) {
-                Toast.makeText(getActivity(), "Club erstellt", Toast.LENGTH_LONG).show();
-                return true;
+                Intent intent = new Intent(getActivity(), CreateClubActivity.class);
+                startActivity(intent);
             }
             return super.onOptionsItemSelected(item);
         }
