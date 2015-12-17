@@ -31,6 +31,7 @@
     <string name="error_notequal_password">Passwörter sind nicht gleich</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">Mindestens fünf Zeichen</string>
+    <string name="error_min_3_chars">Mindestens drei Zeichen</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

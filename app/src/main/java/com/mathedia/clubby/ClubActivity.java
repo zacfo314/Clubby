@@ -202,6 +202,9 @@ public class ClubActivity extends AppCompatActivity {
 
         private static final ArrayList<String> clubIDs = new ArrayList<>();
 
+        // gets all clubs where current user is member
+        ArrayAdapter adapter;
+
         public ClubsFragment() {
         }
 
@@ -227,11 +230,53 @@ public class ClubActivity extends AppCompatActivity {
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
-
-            // gets all clubs where current user is member
-            final ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1);
+            adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1);
             setListAdapter(adapter);
 
+            // Is done in onResume()
+//            ParseQuery<ParseObject> query = ParseQuery.getQuery("Club");
+//            query.whereEqualTo("users", ParseUser.getCurrentUser());
+//
+//            query.findInBackground(new FindCallback<ParseObject>() {
+//                public void done(List<ParseObject> clubList, ParseException e) {
+//                    if (e == null) {
+//                        Log.d("score", "Retrieved " + clubList.size() + " scores");
+//                        for (int i = 0; i < clubList.size(); i++) {
+//                            ParseObject club = clubList.get(i);
+//                            String clubName = club.getString("clubName");
+//                            adapter.add(clubName);
+//                            clubIDs.add(club.getObjectId());
+//                        }
+//                    } else {
+//                        Log.d("score", "Error: " + e.getMessage());
+//                    }
+//                }
+//            });
+        }
+
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            inflater.inflate(R.menu.menu_clubs, menu);
+            super.onCreateOptionsMenu(menu, inflater);
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+            if (id == R.id.action_logout) {
+                ((ClubActivity)getActivity()).logout(true);
+            }
+            if (id == R.id.action_create_club) {
+                Intent intent = new Intent(getActivity(), CreateClubActivity.class);
+                startActivityForResult(intent, 0);
+            }
+            return super.onOptionsItemSelected(item);
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            adapter.clear();
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Club");
             query.whereEqualTo("users", ParseUser.getCurrentUser());
 
@@ -250,25 +295,6 @@ public class ClubActivity extends AppCompatActivity {
                     }
                 }
             });
-        }
-
-        @Override
-        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-            inflater.inflate(R.menu.menu_clubs, menu);
-            super.onCreateOptionsMenu(menu, inflater);
-        }
-
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
-            if (id == R.id.action_logout) {
-                ((ClubActivity)getActivity()).logout(true);
-            }
-            if (id == R.id.action_create_club) {
-                Intent intent = new Intent(getActivity(), CreateClubActivity.class);
-                startActivity(intent);
-            }
-            return super.onOptionsItemSelected(item);
         }
 
         @Override
