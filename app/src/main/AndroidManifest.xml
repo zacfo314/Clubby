@@ -44,6 +44,10 @@
             android:name=".CreateClubActivity"
             android:label="@string/new_club"
             android:parentActivityName=".ClubActivity" />
+        <activity
+            android:name=".AddMemberActivity"
+            android:label="@string/new_member"
+            android:parentActivityName=".ClubMembersActivity" />
     </application>
 
 </manifest>

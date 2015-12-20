@@ -5,10 +5,12 @@
     <string name="app_name">Clubby</string>
     <string name="action_logout">Abmelden</string>
     <string name="action_create_club">Neuer Club</string>
+    <string name="action_add_member">Mitglied hinzufügen</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_login">Anmelden</string>
     <string name="club_members">Mitglieder</string>
     <string name="new_club">Neuer Club</string>
+    <string name="new_member">Neues Mitglied</string>
 
     <!-- Strings related to login -->
     <string name="prompt_name">Benutzername</string>
@@ -24,6 +26,8 @@
 
     <string name="prompt_new_club">Clubname</string>
     <string name="create_club_button_text">Erstellen</string>
+    <string name="prompt_add_member">Benutzername</string>
+    <string name="add_member_button_text">Hinzufügen</string>
 
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">Ungültige E-Mail Adresse</string>

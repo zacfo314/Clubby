@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".ClubMembersActivity">
+    <item
+        android:id="@+id/action_add_member"
+        android:icon="@drawable/addmemberwhite"
+        android:title="@string/action_add_member"
+        android:visible="true"
+        app:showAsAction="ifRoom"
+        />
+</menu>
